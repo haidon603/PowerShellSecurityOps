@@ -1,0 +1,15 @@
+#insert group names that are particularly at risk. Like C sutie, Domain Admin, Database admin, etc. and monitor closely
+
+$groups = "Domain Admins", "Enterprise Admins" 
+
+$result =@() 
+
+foreach($group in $groups) 
+
+{ 
+
+$result = Get-ADGroupMember -Identity $group -Recursive | Select-Object distinguishedName, samaccountname, @{Expression={$group};Label="Group Name"} 
+
+$result 
+
+} 
