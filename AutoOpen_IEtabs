@@ -1,0 +1,17 @@
+#replace urls with those you fancy! great when using the same sites every day
+
+$navOpenInBackgroundTab = 0x1000; 
+
+$ie = new-object -com InternetExplorer.Application 
+
+$ie.Navigate2("https://urlscan.io/"); 
+
+$ie.Navigate2("https://www.url2png.com/", $navOpenInBackgroundTab); 
+
+$ie.Navigate2("https://www.virustotal.com/gui/home/url", $navOpenInBackgroundTab); 
+
+$ie.Navigate2("https://www.ssllabs.com/ssltest/", $navOpenInBackgroundTab); 
+
+$ie.Visible = $true; 
+
+ 
