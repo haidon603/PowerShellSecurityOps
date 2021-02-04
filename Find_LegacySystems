@@ -1,0 +1,25 @@
+#first query for server releases like 2003, 2008, etc. 
+Get-ADComputer -Filter {(OperatingSystem -like "*windows*2003*") -and (Enabled -eq "True")} -Properties OperatingSystem | sort OperatingSystem | ft DNSHostName, OperatingSystem 
+
+#second re-run the above query but only search this time export results to text file and only retrieve the "name" field
+Get-ADComputer -Filter {(OperatingSystem -like "*windows*2003*") -and (Enabled -eq "True")} -Properties OperatingSystem | sort OperatingSystem | ft name| Out-File -FilePath C:\Users\haidon\Documents\Server2003.txt 
+
+#third run this to get description, operatingsystemversion, managedby, etc. fields (the first query is not able to grab these fields :/)
+get-content "C:\Users\haidon\Documents\Server2003.txt" |
+get-adcomputer  -Properties * | 
+select Name, Description, OperatingSystem, whenCreated | ft
+
+#third run the hostnames to identify if any IP addresses, use this output and search for traffic in SIEM/Decommission if possible
+$hosts = get-content "C:\Users\haidon\Documents\Server2003.txt"
+
+foreach ( $h in $hosts )
+{
+    try {
+        $ip = [System.Net.Dns]::GetHostAddresses($h)
+        "  Hostname: $h, IP: $ip"
+    } 
+    catch {
+        "  Hostname: $h, IP: failed to resolve...check DNS record"
+    }
+    
+}  
