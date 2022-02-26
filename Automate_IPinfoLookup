@@ -1,0 +1,29 @@
+#No API necessary as of 2/2022, save as PS1 file and you're good to go!
+
+$text = Read-Host -Prompt "Enter IP you wish to Investigate- not sure where to start? try 8.8.8.8"
+ 
+ 
+$dest = http://ipinfo.io/$text
+$proxy = ([System.Net.WebRequest]::GetSystemWebproxy()).GetProxy($dest)
+$I = Invoke-RestMethod -Uri http://ipinfo.io/$text -Proxy $proxy -ProxyUseDefaultCredentials
+ 
+#uncomment and remove pound sign or "hashtags" to only have fields displayed rather than the command + field format below
+#$I.ip
+#$I.hostname
+#$I.org
+#$I.city
+#$I.country
+#$I.timezone
+write-host "---Per IP info API---"
+write-host "the IP is owned by:"
+$I.org
+ 
+write-host "the IP is located in:"
+$I.city
+$I.country
+ 
+write-host "the IP Reverse to DNS is:"
+$I.hostname
+ 
+write-host "the IP timezone is:"
+$I.timezone
