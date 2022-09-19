@@ -1,4 +1,4 @@
-#insert group names that are particularly at risk. Like C sutie, Domain Admin, Database admin, etc. and monitor closely
+#insert group names that are particularly at risk. Like C suite, Domain Admin, Database admin, etc. and monitor closely
 
 $groups = "Domain Admins", "Enterprise Admins" 
 
