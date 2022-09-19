@@ -10,4 +10,4 @@ $msg = 'Enter the hostname you wish to investigate'
 $text = [Microsoft.VisualBasic.Interaction]::InputBox($msg, $title)
 get-adcomputer $text -Properties * | select Name, Description, OperatingSystem, IPv4Address, whenCreated 
 
-# utilzie select * to retrieve all possible field names
+# use select * to retrieve all possible field names
